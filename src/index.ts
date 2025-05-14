@@ -37,7 +37,7 @@ async function main() {
 
   const spinner = yoctoSpinner({ text: 'Processing: ' }).start();
 
-  // This is O(n^2) complexity so we we want to track visited documents and skip them
+  // This is O(n^2) complexity so we want to track visited documents and skip them (to avoid going through the same document twice and posibly improve performance)
   // TODO: this is still a very slow implementation specially with large set of documents
   // but if this is just a script for backoffice it should be fine
   for (let i = 0; i < documents.length; i++) {
