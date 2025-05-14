@@ -26,14 +26,20 @@ async function main() {
   }
 
   const inputFile = values.inputFile;
-  // // Read input file
   const raw = await fs.readFile(inputFile, 'utf-8');
+
+  // some documents include some non-ascii characters
+  // lets remove those for now for simplicity
   const documents = raw.split(/\r?\n/).map(stripNonASCII).map((l => l.trim())).filter(Boolean);
 
   const groups = [];
   const visited = new Set();
 
-  const spinner = yoctoSpinner({ text: 'Loading…' }).start();
+  const spinner = yoctoSpinner({ text: 'Processing: ' }).start();
+
+  // This is O(n^2) complexity so we we want to track visited documents and skip them
+  // TODO: this is still a very slow implementation specially with large set of documents
+  // but if this is just a script for backoffice it should be fine
   for (let i = 0; i < documents.length; i++) {
     if (visited.has(i)) continue;
 
@@ -43,7 +49,10 @@ async function main() {
     for (let j = i + 1; j < documents.length; j++) {
       if (visited.has(j)) continue;
       const bagOfWords = [documents[i], documents[j]];
-      // we only need vectorization for the documents we are matching
+      // Ideally this should be instantiated once and reused with pre-computed vocab
+      // but that would create a huge sparse vectors and would be memory intensive
+      // our goal is to only find how similar the two text to each other.
+      // we settle for this approach for now.
       const vectorization = new TFID(bagOfWords);
       const cosine = new Cosine(vectorization);
       const score = cosine.similarity(documents[i], documents[j]);

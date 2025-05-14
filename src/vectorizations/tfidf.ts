@@ -1,7 +1,7 @@
 import { tokenize } from './tokenizer'
 import { Vectorization } from './type'
 
-export default class BagOfWords implements Vectorization {
+export default class TFIDF implements Vectorization {
   private documents: string[] = []
   public vocab: string[] = []
   public docFreq: Map<string, number> = new Map()
@@ -12,7 +12,7 @@ export default class BagOfWords implements Vectorization {
     for (const doc of documents) {
       const tokens = tokenize(doc)
       this.documents.push(doc)
-      
+
       const uniqueTokens = new Set([...tokens])
       for (const token of uniqueTokens) {
         const docFreq = this.docFreq.get(token) || 0
@@ -23,6 +23,7 @@ export default class BagOfWords implements Vectorization {
     this.vocab = Array.from(new Set(this.vocab))
   }
 
+  // TF-IDF vector for a string
   public vectorize(text: string): number[] {
     const tokens = tokenize(text)
     const tokenFreq: Record<string, number> = {}

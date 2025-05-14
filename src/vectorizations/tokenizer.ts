@@ -89,8 +89,8 @@ export function tokenize(str: string) {
 }
 
 /**
- * Normalize a company name by converting to lowercase, replacing HTML entities,
- * replacing punctuation with spaces, and removing stop words/suffixes.
+ * Normalize a sting by converting to lowercase, replacing HTML entities,
+ * replacing punctuation with spaces, and removing common suffixes (heuristic approach of identifying same entities)
  * 
  * @param str - The input string to normalize
  * @returns The normalized string
