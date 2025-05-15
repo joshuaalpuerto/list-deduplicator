@@ -1,7 +1,7 @@
 import { tokenize } from './tokenizer'
-import { Vectorization } from './type'
+import { Vectorization } from './types'
 
-export default class TFIDF implements Vectorization {
+export default class TFIDFVectorizer implements Vectorization {
   private documents: string[] = []
   public vocab: string[] = []
   public docFreq: Map<string, number> = new Map()
@@ -24,7 +24,7 @@ export default class TFIDF implements Vectorization {
   }
 
   // TF-IDF vector for a string
-  public vectorize(text: string): number[] {
+  public fit(text: string): number[] {
     const tokens = tokenize(text)
     const tokenFreq: Record<string, number> = {}
 

@@ -1,5 +1,5 @@
-import { Vectorization } from '../vectorizations/type'
-import { Similarity } from './type'
+import { Vectorization } from '../vectorizations/types'
+import { Similarity } from './types'
 
 export default class Cosine implements Similarity {
   private vectorization: Vectorization
@@ -9,8 +9,8 @@ export default class Cosine implements Similarity {
   }
   
   public similarity(a: string, b: string): number {
-    const vectorA = this.vectorization.vectorize(a)
-    const vectorB = this.vectorization.vectorize(b)
+    const vectorA = this.vectorization.fit(a)
+    const vectorB = this.vectorization.fit(b)
 
     // Calculate dot product and magnitudes
     let dot = 0, magnitudeA = 0, magnitudeB = 0

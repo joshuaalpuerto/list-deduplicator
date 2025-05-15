@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 import { parseArgs } from 'node:util';
 import yoctoSpinner from 'yocto-spinner';
 import { stripNonASCII } from './vectorizations/tokenizer';
-import TFID from './vectorizations/tfidf';
+import TFIDFVectorizer from './vectorizations/tfidf';
 import Cosine from './similarity/cosine';
 
 async function main() {
@@ -53,7 +53,7 @@ async function main() {
       // but that would create a huge sparse vectors and would be memory intensive
       // our goal is to only find how similar the two text to each other.
       // we settle for this approach for now.
-      const vectorization = new TFID(bagOfWords);
+      const vectorization = new TFIDFVectorizer(bagOfWords);
       const cosine = new Cosine(vectorization);
       const score = cosine.similarity(documents[i], documents[j]);
 
