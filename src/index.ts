@@ -54,7 +54,7 @@ async function main() {
       // Ideally this should be instantiated once and reused with pre-computed vocab
       // but that would create a huge sparse vectors and would be memory intensive
       // Since we are only interested in the similarity between the two text,
-      // we can just transform the two text and then have a simple term frequency vectors,
+      // we just transform the two text and then have a simple term frequency vectors,
       // and calculate the cosine similarity.
       const vectors = vectorizer.fit_transform(bagOfWords);
       const score = cosine.similarity(vectors[0], vectors[1]);
