@@ -1,3 +1,3 @@
 export interface Similarity {
-  similarity(a: string, b: string): number
+  similarity(vectorA: number[], vectorB: number[]): number
 }
