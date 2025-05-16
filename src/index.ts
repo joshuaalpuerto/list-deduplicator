@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import { parseArgs } from 'node:util';
 import yoctoSpinner from 'yocto-spinner';
-import { stripNonASCII } from './vectorizations/tokenizer';
+import { tokenizer, stripNonASCII } from './vectorizations/tokenizer';
 import TFIDFVectorizer from './vectorizations/tfidf';
 import Cosine from './similarity/cosine';
 
@@ -31,6 +31,8 @@ async function main() {
   // some documents include some non-ascii characters
   // lets remove those for now for simplicity
   const documents = raw.split(/\r?\n/).map(stripNonASCII).map((l => l.trim())).filter(Boolean);
+  const vectorizer = new TFIDFVectorizer(tokenizer);
+  const cosine = new Cosine();
 
   const groups = [];
   const visited = new Set();
@@ -51,11 +53,11 @@ async function main() {
       const bagOfWords = [documents[i], documents[j]];
       // Ideally this should be instantiated once and reused with pre-computed vocab
       // but that would create a huge sparse vectors and would be memory intensive
-      // our goal is to only find how similar the two text to each other.
-      // we settle for this approach for now.
-      const vectorization = new TFIDFVectorizer(bagOfWords);
-      const cosine = new Cosine(vectorization);
-      const score = cosine.similarity(documents[i], documents[j]);
+      // Since we are only interested in the similarity between the two text,
+      // we can just transform the two text and then have a simple term frequency vectors,
+      // and calculate the cosine similarity.
+      const vectors = vectorizer.fit_transform(bagOfWords);
+      const score = cosine.similarity(vectors[0], vectors[1]);
 
       if (score >= 0.6) {
         group.push(documents[j]);
