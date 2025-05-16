@@ -1,16 +1,24 @@
-import { tokenize } from './tokenizer'
 import { Vectorization } from './types'
 
+type Tokenizer = (str: string) => string[]
 export default class TFIDFVectorizer implements Vectorization {
   private documents: string[] = []
   public vocab: string[] = []
   public docFreq: Map<string, number> = new Map()
-
+  private tokenizer: Tokenizer
   // Add company name (document) to the list
-  public constructor(documents: string[]) {
+  public constructor(tokenizer: Tokenizer) {
+    this.tokenizer = tokenizer
+  }
+
+  // pre-compute the TF-IDF vector for each document
+  public fit_transform(documents: string[]): number[][] {
     this.vocab = []
+    this.documents = []
+    this.docFreq = new Map()
+
     for (const doc of documents) {
-      const tokens = tokenize(doc)
+      const tokens = this.tokenizer(doc)
       this.documents.push(doc)
 
       const uniqueTokens = new Set([...tokens])
@@ -20,12 +28,15 @@ export default class TFIDFVectorizer implements Vectorization {
       }
       this.vocab.push(...tokens)
     }
+
     this.vocab = Array.from(new Set(this.vocab))
+    // we return the vectorized matrix
+    return this.documents.map(doc => this.transform(doc))
   }
 
   // TF-IDF vector for a string
-  public fit(text: string): number[] {
-    const tokens = tokenize(text)
+  public transform(text: string): number[] {
+    const tokens = this.tokenizer(text)
     const tokenFreq: Record<string, number> = {}
 
     for (const token of tokens) {

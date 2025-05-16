@@ -1,3 +1,4 @@
 export interface Vectorization {
-  fit(text: string): number[]
+  transform(text: string): number[]
+  fit_transform(documents: string[]): number[][]
 }

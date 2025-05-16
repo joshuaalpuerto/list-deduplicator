@@ -76,7 +76,7 @@ export const STOP_WORDS = [
  * @param str - The input string to tokenize
  * @returns An array of tokens
  */
-export function tokenize(str: string) {
+export function tokenizer(str: string): string[] {
   let normalizedText = stripNonASCII(str);
   normalizedText = removeAccents(normalizedText);
   normalizedText = normalizeName(normalizedText);
