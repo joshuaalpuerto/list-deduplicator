@@ -49,7 +49,7 @@ export default class TFIDFVectorizer implements Vectorization {
     return this.vocab.map(term => {
       // normalize TF base on maxFreq, which produce between 0 and 1.
       // since locality(per document) we only care if the term is present or not
-      const tf = (tokenFreq[term] || 0) / tokens.length
+      const tf = (tokenFreq[term] || 0) / maxFreq
       const df = this.docFreq.get(term) || 0
       // Base on our implementation we want common words exist in both document
       // to still contribute to similarity for this task.
