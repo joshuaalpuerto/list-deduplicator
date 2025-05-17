@@ -47,12 +47,14 @@ export default class TFIDFVectorizer implements Vectorization {
     const totalDocs = this.documents.length || 1
 
     return this.vocab.map(term => {
-      // apply raw term frequency to prevent penalizing common terms
-      // as our goal is to find similar names between two documents
-      const tf = (tokenFreq[term] || 0) / maxFreq
+      // normalize TF base on maxFreq, which produce between 0 and 1.
+      // since locality(per document) we only care if the term is present or not
+      const tf = (tokenFreq[term] || 0) / tokens.length
       const df = this.docFreq.get(term) || 0
-      // note we apply some smoothing to avoid division by zero
+      // Base on our implementation we want common words exist in both document
+      // to still contribute to similarity for this task.
       const idf = Math.log((totalDocs + 1) / (df + 1)) + 1
+      // hmm should we remove idf and just use tf? (bow + cosine)
       return tf * idf
     })
   }
