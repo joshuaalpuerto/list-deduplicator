@@ -19,6 +19,7 @@ The deduplication process involves several steps:
 3.  **Vectorization (TF-IDF)**:
     *   For each pair of documents being compared, a TF-IDF (Term Frequency-Inverse Document Frequency) model is created.
     *   TF-IDF assigns weights to words based on their frequency in a document and their rarity across the set of documents being compared. This helps in highlighting important distinguishing words.
+    *   **Note:** In this implementation, the TF-IDF vectorizer is instantiated for each pair of documents, using only those two documents to build the vocabulary. This is different from the typical approach of building a global vocabulary for the entire dataset. This method avoids creating large, sparse vectors and is more memory efficient for pairwise comparison, but may yield slightly different results than a global TF-IDF. See the code comment in `src/index.ts` for more details.
 4.  **Similarity Calculation (Cosine Similarity)**:
     *   The TF-IDF vectors of two documents are compared using Cosine Similarity.
     *   Cosine Similarity measures the cosine of the angle between two vectors, providing a score between 0 and 1 that indicates how similar they are. A score closer to 1 means higher similarity.
