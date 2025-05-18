@@ -1,7 +1,7 @@
 import { Similarity } from './types'
 
-export default class Cosine implements Similarity {
-  public similarity(vectorA: number[], vectorB: number[]): number {
+export default class Cosine implements Similarity<number[]> {
+  similarity(vectorA: number[], vectorB: number[]): number {
     // Calculate dot product and magnitudes
     let dot = 0, magnitudeA = 0, magnitudeB = 0;
     for (let i = 0; i < vectorA.length; i++) {

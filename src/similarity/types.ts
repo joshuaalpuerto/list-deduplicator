@@ -1,3 +1,4 @@
-export interface Similarity {
-  similarity(vectorA: number[], vectorB: number[]): number
+export interface Similarity<T> {
+  // The higher the result the more similar the two items are
+  similarity(a: T, b: T): number
 }
