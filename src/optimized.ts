@@ -44,9 +44,8 @@ async function main() {
 
   const spinner = yoctoSpinner({ text: 'Processing: ' }).start();
 
-  // This is O(n^2) complexity so we want to track visited documents and skip them (to avoid going through the same document twice and posibly improve performance)
-  // TODO: this is still a very slow implementation specially with large set of documents
-  // but if this is just a script for backoffice it should be fine
+  // This is O(n^2) complexity for worst case scenario but it lessen the amount the number it needs to compare because we are using a map to store the groups
+  // this is way faster compared to previous implementation.
   for (let i = 0; i < documents.length; i++) {
     // we don't have any group yet add the first document
     if (grouped.size === 0) {
