@@ -11,8 +11,7 @@ export default class TFIDFVectorizer implements Vectorization {
     this.tokenizer = tokenizer
   }
 
-  // pre-compute the TF-IDF vector for each document
-  public fit_transform(documents: string[]): number[][] {
+  public fit(documents: string[]): void {
     this.vocab = []
     this.documents = []
     this.docFreq = new Map()
@@ -30,6 +29,11 @@ export default class TFIDFVectorizer implements Vectorization {
     }
 
     this.vocab = Array.from(new Set(this.vocab))
+  }
+
+  // pre-compute the TF-IDF vector for each document
+  public fit_transform(documents: string[]): number[][] {
+    this.fit(documents)
     // we return the vectorized matrix
     return this.documents.map(doc => this.transform(doc))
   }
