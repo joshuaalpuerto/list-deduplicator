@@ -1,6 +1,6 @@
 import { Vectorization } from './types'
+import { Tokenizer } from '../tokenizers/types'
 
-type Tokenizer = (str: string) => string[]
 export default class TFIDFVectorizer implements Vectorization {
   private documents: string[] = []
   public vocab: string[] = []
@@ -49,7 +49,7 @@ export default class TFIDFVectorizer implements Vectorization {
 
     const maxFreq = Math.max(...Object.values(tokenFreq), 1)
     const totalDocs = this.documents.length || 1
-
+    // we do Augmented Term Frequency variant here 
     return this.vocab.map(term => {
       // normalize TF base on maxFreq, which produce between 0 and 1.
       // since locality(per document) we only care if the term is present or not
@@ -58,7 +58,7 @@ export default class TFIDFVectorizer implements Vectorization {
       // Base on our implementation we want common words exist in both document
       // to still contribute to similarity for this task.
       const idf = Math.log((totalDocs + 1) / (df + 1)) + 1
-      // hmm should we remove idf and just use tf? (bow + cosine)
+
       return tf * idf
     })
   }
