@@ -1,13 +1,12 @@
+
 import { promises as fs } from 'fs';
 import { parseArgs } from 'node:util';
 import yoctoSpinner from 'yocto-spinner';
-import { tokenizer, stripNonASCII } from './vectorizations/tokenizer';
-import TFIDFVectorizer from './vectorizations/tfidf';
-import Cosine from './similarity/cosine';
+import { bag_of_words, TFIDFVectorizer, Cosine } from '../src/index';
 
 async function main() {
   // should accept args from command line
-  // npm start -- --inputFile=./data/companies.txt --outputFile=./output.json
+  // node --loader ts-node/esm demo/tf-idf_cosine_similarity.ts --inputFile=./data/companies.txt --outputFile=./output.json
   const { values } = parseArgs({
     args: process.argv.slice(2), options: {
       inputFile: {
@@ -21,17 +20,15 @@ async function main() {
   });
 
   if (!values.inputFile || !values.outputFile) {
-    console.error('Usage: npm start -- --inputFile=./data/companies.txt --outputFile=./output.json');
+    console.error('Usage: node --loader ts-node/esm demo/tf-idf_cosine_similarity.ts --inputFile=./data/companies.txt --outputFile=./output.json');
     process.exit(1);
   }
 
   const inputFile = values.inputFile;
   const raw = await fs.readFile(inputFile, 'utf-8');
 
-  // some documents include some non-ascii characters
-  // lets remove those for now for simplicity
-  const documents = raw.split(/\r?\n/).map(stripNonASCII).map((l => l.trim())).filter(Boolean);
-  const vectorizer = new TFIDFVectorizer(tokenizer);
+  const documents = raw.split(/\r?\n/).map((l => l.trim())).filter(Boolean);
+  const vectorizer = new TFIDFVectorizer(bag_of_words);
   // lear the vocabularty
   vectorizer.fit(documents);
   const cosine = new Cosine();
