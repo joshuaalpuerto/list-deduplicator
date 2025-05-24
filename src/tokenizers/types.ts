@@ -1,0 +1,1 @@
+export type Tokenizer = (str: string) => string[]
