@@ -1,7 +1,7 @@
 {
-  "name": "list-deduplicator",
+  "name": "string-similarity-ts",
   "version": "1.0.0",
-  "description": "",
+  "description": "A toolkit for string similarity",
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
