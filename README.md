@@ -1,4 +1,6 @@
-# string-similarity-ts: A Toolkit for String Similarity
+# string-similarity-ts
+
+A Toolkit for String Similarity
 
 `string-similarity-ts` is a Node.js library and command-line tool designed to identify and group similar items from a given list of strings. This repository showcases and exposes multiple types of string similarity algorithms and vectorization techniques, making it a practical reference for deduplication, fuzzy matching, and as a reusable library for your own projects.
 
