@@ -9,7 +9,7 @@ import { Similarity } from './types'
  * const similarity = levenshtien.similarity('hello', 'hello');
  * console.log(similarity); // 100
  */
-export default class Levenshtien implements Similarity<string> {
+export default class Levenshtein implements Similarity<string> {
   public similarity(str1: string, str2: string): number {
     // Create a 2D array to store the distances between substrings of str1 and str2
     const distanceMatrix: number[][] = [];
