@@ -3,6 +3,7 @@ export { default as Jaccard } from './similarity/jaccard';
 export { default as Levenshtein } from './similarity/levenshtein';
 export { default as TFIDFVectorizer } from './vectorizations/tfidf';
 export { bag_of_words } from './tokenizers/bag_of_words';
+export { basicNormalizer } from './tokenizers/normalizers';
 
 // types
 import { Tokenizer } from './tokenizers/types'
