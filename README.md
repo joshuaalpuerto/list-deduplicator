@@ -32,7 +32,6 @@ A Toolkit for String Similarity
 This repository demonstrates and will expose several approaches to string similarity for direct use in your own projects:
 
 ### 1. Cosine Similarity (with TF-IDF Vectorization)
-- **Default method used in the main scripts.**
 - Each string is tokenized, normalized, and vectorized using TF-IDF.
 - Cosine similarity is computed between vectors to determine group membership.
 - Well-suited for longer texts or when word overlap is important.
