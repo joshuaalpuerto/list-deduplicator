@@ -7,7 +7,7 @@ import { Similarity } from './types'
  * @example
  * const levenshtien = new Levenshtien();
  * const similarity = levenshtien.similarity('hello', 'hello');
- * console.log(similarity); // 100
+ * console.log(similarity); // 1
  */
 export default class Levenshtein implements Similarity<string> {
   public similarity(str1: string, str2: string): number {
