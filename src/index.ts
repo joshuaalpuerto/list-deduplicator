@@ -1,6 +1,7 @@
 export { default as Cosine } from './similarity/cosine';
 export { default as Jaccard } from './similarity/jaccard';
 export { default as Levenshtein } from './similarity/levenshtein';
+export { default as Dice } from './similarity/dice';
 export { default as TFIDFVectorizer } from './vectorizations/tfidf';
 export { bagOfWords } from './tokenizers/bag-of-words';
 export { basicNormalizer } from './tokenizers/normalizers';
