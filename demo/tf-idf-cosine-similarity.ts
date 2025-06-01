@@ -2,7 +2,7 @@
 import { promises as fs } from 'fs';
 import { parseArgs } from 'node:util';
 import yoctoSpinner from 'yocto-spinner';
-import { bag_of_words, TFIDFVectorizer, Cosine } from '../src/index';
+import { bagOfWords, TFIDFVectorizer, Cosine } from '../src/index';
 
 async function main() {
   // should accept args from command line
@@ -28,7 +28,7 @@ async function main() {
   const raw = await fs.readFile(inputFile, 'utf-8');
 
   const documents = raw.split(/\r?\n/).map((l => l.trim())).filter(Boolean);
-  const vectorizer = new TFIDFVectorizer(bag_of_words);
+  const vectorizer = new TFIDFVectorizer(bagOfWords);
   // lear the vocabularty
   vectorizer.fit(documents);
   const cosine = new Cosine();

@@ -8,7 +8,7 @@ import { basicNormalizer } from './normalizers'
  * @param str - The input string to tokenize
  * @returns An array of tokens
  */
-export const bag_of_words: Tokenizer = (str) => {
+export const bagOfWords: Tokenizer = (str) => {
   const normalizedText = basicNormalizer(str);
 
   const tokens = normalizedText.split(/\s+/) as string[]; // split into words

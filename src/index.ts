@@ -2,7 +2,7 @@ export { default as Cosine } from './similarity/cosine';
 export { default as Jaccard } from './similarity/jaccard';
 export { default as Levenshtein } from './similarity/levenshtein';
 export { default as TFIDFVectorizer } from './vectorizations/tfidf';
-export { bag_of_words } from './tokenizers/bag_of_words';
+export { bagOfWords } from './tokenizers/bag-of-words';
 export { basicNormalizer } from './tokenizers/normalizers';
 
 // types
