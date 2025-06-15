@@ -9,11 +9,6 @@ A Toolkit for String Similarity
 - Handling variations in spelling, legal suffixes, or non-essential terms
 - Exploring, comparing, and integrating different similarity algorithms into your own applications
 
-## Prerequisites
-
-* Node.js (see `package.json` for version, e.g., >=18.19)
-* pnpm (or npm/yarn; `pnpm-lock.yaml` is provided)
-
 ## Installation
 
 1. Clone the repository or download the project files.
