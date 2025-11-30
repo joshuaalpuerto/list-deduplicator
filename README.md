@@ -34,7 +34,7 @@ This repository demonstrates and will expose several approaches to string simila
 ### 2. Levenshtein Distance
 - Measures the minimum number of single-character edits required to change one string into another.
 - Useful for catching typos or small spelling variations.
-- Provided as a module (`src/similarity/levenshtien.ts`) and can be integrated into grouping logic or used directly in your code.
+- Provided as a module (`src/similarity/levenshtien.ts`).
 
 ### 3. Jaccard Similarity
 - Measures the overlap between sets of tokens (intersection over union).
@@ -45,7 +45,7 @@ This repository demonstrates and will expose several approaches to string simila
 - Measures similarity between two strings based on bigrams (2-character substrings).
 - Defined as twice the number of common bigrams divided by the total number of bigrams in both strings.
 - Effective for detecting string similarity with character-level precision, especially useful for name matching and fuzzy string comparison.
-- Provided as a module (`src/similarity/dice.ts`) and returns values between 0-1.
+- Provided as a module (`src/similarity/dice.ts`).
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests for new similarity methods, optimizations, or documentation improvements.
